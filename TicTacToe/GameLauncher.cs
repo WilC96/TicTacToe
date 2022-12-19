@@ -6,10 +6,12 @@ namespace TicTacToe
     public class GameLauncher : IGameLauncher
     {
         private readonly IAbstractFactory<IDisplayService> _displayServiceFactory;
+        private readonly IPlayerInput _playerInput;
 
-        public GameLauncher(IAbstractFactory<IDisplayService> displayServiceFactory)
+        public GameLauncher(IAbstractFactory<IDisplayService> displayServiceFactory, IPlayerInput playerInput)
         {
             this._displayServiceFactory = displayServiceFactory;
+            this._playerInput = playerInput;
         }
 
         IDisplayService? displayService;
@@ -55,7 +57,7 @@ namespace TicTacToe
 
             do
             {
-                string userInput = Console.ReadLine()!;
+                string userInput = _playerInput.GetPlayerInput();
 
                 if (!string.IsNullOrEmpty(userInput) &&
                     (userInput.Equals("1") ||

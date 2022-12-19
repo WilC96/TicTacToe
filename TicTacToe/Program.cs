@@ -9,6 +9,7 @@ var host = Host.CreateDefaultBuilder()
     .ConfigureServices((cxt, services) =>
     {
         services.AddAbstractFactory<IDisplayService, DisplayService>();
+        services.AddSingleton<IPlayerInput, PlayerInput>();
         services.AddSingleton<IGameLauncher, GameLauncher>();
     })
     .Build();
